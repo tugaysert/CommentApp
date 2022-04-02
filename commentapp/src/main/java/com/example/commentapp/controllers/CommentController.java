@@ -3,6 +3,7 @@ package com.example.commentapp.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.example.commentapp.requests.CommentCreateRequest;
 import com.example.commentapp.requests.CommentUpdateRequest;
 import com.example.commentapp.services.CommentService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
