@@ -42,7 +42,7 @@ public class UserController {
 	@GetMapping("/{userId}")
 	public User getOneUser(@PathVariable int userId) {
 		
-		return userService.getOneUser(userId);
+		return userService.getOneUserById(userId);
 	}
 	
 	@PutMapping("/{userId}") 

@@ -27,7 +27,7 @@ public class UserService {
 		return userRepository.save(newUser);
 	}
 
-	public User getOneUser(int userId) {
+	public User getOneUserById(int userId) {
 		
 		return userRepository.findById(userId).orElse(null);
 	}

@@ -43,7 +43,7 @@ public class PostService {
 		//Önce bir validasyon yapmamız lazım.
 		//post oluşturmak istiyorum ama gelen userId database'de var mı?
 		//buna bakmak icin de UserService'e baglanmamiz gerekecek.
-		User user = userService.getOneUser(newPostRequest.getUserId());
+		User user = userService.getOneUserById(newPostRequest.getUserId());
 		if(user == null) return null;
 		
 		//daha sonra converter atilabilir, ama simdilik:
