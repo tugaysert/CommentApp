@@ -14,57 +14,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.commentapp.entities.User;
-import com.example.commentapp.repositories.UserRepository;
+import com.example.commentapp.services.UserService;
+
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	
 	
-	private UserRepository userRepository;
+	 private UserService userService;
 	
-	@Autowired
-	public UserController(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 	
 	@GetMapping
 	public List<User> getAllUsers(){
-		return userRepository.findAll();
+		return userService.getAllUsers();
 	}
 	
 	@PostMapping
 	public User createUser(@RequestBody User newUser) {
-		return userRepository.save(newUser);
+		return userService.saveOneUser(newUser);
 	}
 	
 	@GetMapping("/{userId}")
 	public User getOneUser(@PathVariable int userId) {
-		//bu id bizim database'de olmayabilir.
-		//optional bir sey donuyor
-		//custom exception eklenecek.
-		return userRepository.findById(userId).orElse(null);
+		
+		return userService.getOneUser(userId);
 	}
 	
 	@PutMapping("/{userId}") 
 	public User updateOneUser(@PathVariable int userId,
 			@RequestBody User newUser) {
-		Optional<User> user = userRepository.findById(userId);
-		if(user.isPresent()) {
-			User foundUser = user.get();
-			foundUser.setUserName(newUser.getUserName());
-			foundUser.setPassword(newUser.getPassword());
-			userRepository.save(foundUser);
-			return foundUser;
-		}
-		//custom exception gelecek
-		else return null;
+		return userService.updateOneUser(userId, newUser);
 	}	
 	
 	@DeleteMapping("/{userId}")
 	public void deleteOneUser(@PathVariable int userId) {
 		
-		userRepository.deleteById(userId);
+		userService.deleteById(userId);
 	}
 	
 
